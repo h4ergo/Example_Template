@@ -261,7 +261,7 @@ html, body, .perspective {
 
 /* Effect airbnb */
 .effect-airbnb {
-	background-image:url(../images/bgp.png);
+	background-image:url(../images/bgp.jpg);
 	background-size:cover;
 }
 @media (max-width:760px){
