@@ -28,6 +28,9 @@
 <script type="text/javascript" src="scripts/jqueryui.js"></script>
 <script type="text/javascript" src="scripts/framework.plugins.js"></script>
 <script type="text/javascript" src="scripts/custom.js"></script>
+		
+		<script type="text/javascript" src="phonegap.js"></script>
+		<script type="text/javascript" src="scripts/plugin/email_composer.js"></script>
 
 </head>
 <body>
@@ -46,32 +49,29 @@
     <div class="header">
         <a href="#" id="showMenu"><i class="fa fa-navicon"></i></a>
         <a href="#" id="pageLogo"><img src="images/logo.png" alt="img"></a>
-        <a href="#" id="openMail"><i class="fa fa-envelope-o"></i></a>
+        <a href="contact.html" id="openMail"><i class="fa fa-envelope-o"></i></a>
     </div> 	
     <div class="outer-nav">
         <div class="inner-nav">
             <div class="nav-item">
                 <a href="index.html" class="active-item">
-                    <i class="nav-icon fa fa-home"></i>
                     Home
                 </a>
             </div>
             <div class="nav-item">
                 <a href="#" class="deploy-nav-sub-item">
-                    <i class="nav-icon fa fa-cog"></i>
                     Devi ricordarti che...
                 </a>				
                 <div class="nav-sub-item">
-                    <a href="bouquet.html">Il Bouquet</a>
+                    <font style="color: black;"><a href="bouquet.html">Il Bouquet</a>
                     <a href="fedi.html">Le fedi</a>
                     <a href="confetti.html">I Confetti</a>
                     <a href="giarrettiera.html">La Giarrettiera</a>
-                    <a href="bomboniera.html">La Bomboniera</a>
+                    <a href="bomboniera.html">La Bomboniera</a></font>
                 </div>
             </div>
             <div class="nav-item">
                 <a href="#" class="deploy-nav-sub-item">
-                    <i class="nav-icon fa fa-picture-o"></i>
                     Prima e durante...
                 </a>
 				<div class="nav-sub-item">
@@ -81,7 +81,6 @@
             </div>
             <div class="nav-item">
                 <a href="#" class="deploy-nav-sub-item">
-                    <i class="nav-icon fa fa-files-o"></i>
                     Saper scegliere bene...
                 </a>				
 				<div class="nav-sub-item">
@@ -92,19 +91,16 @@
             </div>
             <div class="nav-item">
                 <a href="anniversari.html">
-                    <i class="nav-icon fa fa-envelope"></i>
                     Gli Anniversari
                 </a>
             </div>
             <div class="nav-item">
                 <a href="contact.html">
-                    <i class="nav-icon fa fa-envelope"></i>
                     Contattaci
                 </a>
             </div>
             <div class="nav-item">
                 <a id="closeMenu" href="#">
-                    <i class="nav-icon fa fa-times"></i>
                     Chiudi
                 </a>
             </div>
@@ -121,40 +117,55 @@
                     <p>Se vuoi contattarci per esporci dei dubbi, avere informazioni o richiedere uno spazio sponsor su questa o altre APP, non esitare a contattarci!<br><br>Ti ricordiamo che SiGi Technologies sviluppa applicazioni come questa anche per la tua azienda.<br> <b>Crea una app e fatti conoscere!</b></p>
                     <div class="container no-bottom">
                         <div class="contact-form no-bottom"> 
+						
+							<script>
+							document.addEventListener('deviceready', function () {
+								// window.plugin.email is now available
+							}, false);
+							
+							window.plugin.email.isServiceAvailable(
+								function (isAvailable) {
+									// alert('Service is not available') unless isAvailable;
+								}
+							);
+							
+							function send_email_test(){
+								var error = false;
+								var nomin 		= document.getElementById("nomin").value; 		if(nomin == "") error = true;
+								var email 		= document.getElementById("email").value; 		if(email == "") error = true;
+								var telef 		= document.getElementById("telef").value;
+								var messag 	= document.getElementById("messag").value; 		if(messag == "") error = true;
+							
+								if(error == true){
+									alert("Please fill the required fields on the contact form and retry!");
+								}
+								else{
+									window.plugin.email.open({
+										to:      	['sigitechnologies@gmail.com'],
+										//cc:      ['erika.mustermann@appplant.de'],
+										//bcc:     ['john.doe@appplant.com', 'jane.doe@appplant.com'],
+										subject: 'Richiesta di contatto su Matrimonio ed Usanze APP',
+										body:    '<b>Nome</b>: ' + nomin + '<br \><br \>' + '<b>E-Mail</b>: ' + email + '<br \><br \>' + '<b>Messaggio</b>:<br \><br \>' + messag + '<br \><br \>' + 'Saluti\n' + nomin,
+										isHtml:  true
+									});
+								}
+							}
+							</script>		
                         
                             <form action="php/contact.php" method="post" class="contactForm" id="contactForm">
                                 <fieldset>
-                                    <div class="formValidationError" id="contactNameFieldError">
-                                        <div class="static-notification-red tap-dismiss-notification">
-                                            <p class="center-text uppercase">Name is required!</p>
-                                        </div>
-                                    </div>             
-                                    <div class="formValidationError" id="contactEmailFieldError">
-                                        <div class="static-notification-red tap-dismiss-notification">
-                                            <p class="center-text uppercase">Mail address required!</p>
-                                        </div>
-                                    </div> 
-                                    <div class="formValidationError" id="contactEmailFieldError2">
-                                        <div class="static-notification-red tap-dismiss-notification">
-                                            <p class="center-text uppercase">Mail address must be valid!</p>
-                                        </div>
-                                    </div> 
-                                    <div class="formValidationError" id="contactMessageTextareaError">
-                                        <div class="static-notification-red tap-dismiss-notification">
-                                            <p class="center-text uppercase">Message field is empty!</p>
-                                        </div>
-                                    </div>   
+                                    
                                     <div class="formFieldWrap">
-                                        <label class="field-title contactNameField" for="contactNameField">Name:<span>(required)</span></label>
-                                        <input type="text" name="contactNameField" value="" class="contactField requiredField" id="contactNameField"/>
+                                        <label class="field-title contactNameField" for="contactNameField">Nome:<span>(obbligatorio)</span></label>
+                                        <input type="text" value="" class="contactField requiredField" name="nomin" id="nomin" />
                                     </div>
                                     <div class="formFieldWrap">
-                                        <label class="field-title contactEmailField" for="contactEmailField">Email: <span>(required)</span></label>
-                                        <input type="text" name="contactEmailField" value="" class="contactField requiredField requiredEmailField" id="contactEmailField"/>
+                                        <label class="field-title contactEmailField" for="contactEmailField">Email: <span>(obbligatorio)</span></label>
+                                        <input type="text" value="" class="contactField requiredField requiredEmailField" name="email" id="email" />
                                     </div>
                                     <div class="formTextareaWrap">
-                                        <label class="field-title contactMessageTextarea" for="contactMessageTextarea">Message: <span>(required)</span></label>
-                                        <textarea name="contactMessageTextarea" class="contactTextarea requiredField" id="contactMessageTextarea"></textarea>
+                                        <label class="field-title contactMessageTextarea" for="contactMessageTextarea">Messaggio: <span>(obbligatorio)</span></label>
+                                        <textarea class="contactTextarea requiredField" name="messag" id="messag" ></textarea>
                                     </div>
                                     <div class="formSubmitButtonErrorsWrap">
                                         <input type="submit" class="buttonWrap button button-green contactSubmitButton" id="contactSubmitButton" value="SUBMIT" data-formId="contactForm"/>

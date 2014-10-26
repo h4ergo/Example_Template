@@ -55,9 +55,10 @@
 }
 
 .nav-item a{
+	/*background: rgba(255,255,255,0.1) ;*/
 	color:#CCC;
 	font-family:'Roboto', sans-serif;
-	font-size:14px;	
+	font-size:15px;	
 	padding-bottom:13px;
 	padding-top:13px;
 	font-weight:400!important;
@@ -78,7 +79,7 @@
 	font-size:12px;
 	padding-bottom:10px;
 	padding-top:10px;
-	opacity:0.5!important;
+	opacity:0.9!important;
 }
 
 .nav-icon{
