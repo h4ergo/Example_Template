@@ -133,7 +133,6 @@
 								var error = false;
 								var nomin 		= document.getElementById("nomin").value; 		if(nomin == "") error = true;
 								var email 		= document.getElementById("email").value; 		if(email == "") error = true;
-								var telef 		= document.getElementById("telef").value;
 								var messag 	= document.getElementById("messag").value; 		if(messag == "") error = true;
 							
 								if(error == true){
@@ -168,7 +167,7 @@
                                         <textarea class="contactTextarea requiredField" name="messag" id="messag" ></textarea>
                                     </div>
                                     <div class="formSubmitButtonErrorsWrap">
-                                        <input type="submit" class="buttonWrap button button-green contactSubmitButton" id="contactSubmitButton" value="SUBMIT" data-formId="contactForm"/>
+                                        <input type="button" class="buttonWrap button button-green contactSubmitButton" id="contactSubmitButton" value="INVIA" data-formId="contactForm" onClick="send_email_test()"/>
                                     </div>
                                 </fieldset>
                             </form>       
